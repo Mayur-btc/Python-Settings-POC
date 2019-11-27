@@ -69,6 +69,15 @@
                             </div>
                             {%endfor%}
                             <div class="form-group">
+                                    <input type="text" class="form-control" id="id_password" name="password" placeholder="Password" required>
+                                </div>
+                                {%for error in form.password.errors%}
+                                <div class="alert alert-danger">
+                                    <strong>{{ error }}</strong>
+                                </div>
+                                {%endfor%}
+                                
+                            <div class="form-group">
                                 <label class=" btn btn-primary btn-file">
                                     Upload Profile Photo<input class="form-control-file custom-file-input d-none"
                                         style="display: none;" type="file" name="image" accept="image/*" id="id_image"/>
