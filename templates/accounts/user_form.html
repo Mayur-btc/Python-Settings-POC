@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE HTML5>
+<html>
+
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
+    <style>
+        .border-bottom {
+            border-color: #eee;
+        }
+    </style>
+</head>
+
+<body style="background-color: #e3e7e5;">
+    <div class="container">
+        <div class="row">
+            <div class="main col-md-10">
+                <div class="row">
+                    <div class="col-md-6 text-center offset-3">
+                        <div class="pb-2 mt-4 mb-2 border-bottom">
+                            <h1>User Form</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 form-area offset-3">
+                        <form role="form" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="text" value="{% if form.username.value%} {{form.username.value}} {%endif%}"
+                                    class="form-control" id="id_username" name="username" placeholder="Name" required>
+                            </div>
+                            {%for error in form.username.errors%}
+                            <div class="alert alert-danger">
+                                <strong>{{ error }}</strong>
+                            </div>
+                            {%endfor%}
+                            <div class="form-group">
+                                <input type="text"
+                                    value="{% if form.phone_number.value%} {{form.phone_number.value}} {%endif%}"
+                                    class="form-control" id="id_phone_number" name="phone_number"
+                                    placeholder="Mobile Number" required>
+                            </div>
+                            {%for error in form.phone_number.errors%}
+                            <div class="alert alert-danger">
+                                <strong>{{ error }}</strong>
+                            </div>
+                            {%endfor%}
+                            <div class="form-group">
+                                {{ form.gender }}
+                            </div>
+                            {%for error in form.gender.errors%}
+                            <div class="alert alert-danger">
+                                <strong>{{ error }}</strong>
+                            </div>
+                            {%endfor%}
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="id_birthday" name="birthday"
+                                    placeholder="Date of Birth(YYYY-MM-DD)" required>
+                            </div>
+                            {%for error in form.birthday.errors%}
+                            <div class="alert alert-danger">
+                                <strong>{{ error }}</strong>
+                            </div>
+                            {%endfor%}
+                            <div class="form-group">
+                                <label class=" btn btn-primary btn-file">
+                                    Upload Profile Photo<input class="form-control-file custom-file-input d-none"
+                                        style="display: none;" type="file" name="image" accept="image/*" id="id_image"/>
+                                </label>
+                                <label id="filename">Choose image</label>
+                            </div>
+                            <input class="btn btn-primary" type="submit" style="background-color: #3f00ff;
+                    color: #fff;
+                    font-size: 14px;
+                    padding: 5px 20px;
+                    border: none;" value="Save">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('#id_image').on('change',function(){
+                //get the file name
+                var fileName = $(this).val();
+                //replace the "Choose a file" label
+                $('#filename').html(fileName.split("\\").pop());
+            })
+        $(".side-menu-anchor").removeClass("active")
+        $('#add-user-anchor').addClass("active")
+    </script>
+</body>
+
+</html>

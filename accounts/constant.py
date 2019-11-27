@@ -1,0 +1,1 @@
+gender_choices = (('M','Male'),('F','Female'),('O',"Other"))
